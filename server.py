@@ -16,5 +16,18 @@ def index():
     connection = get_db_connection()
     items = connection.execute("SELECT * FROM savingpots").fetchall()
     connection.close()
-    return render_template("index.html", items=items)
+    return render_template("./index.html", items=items)
+
+@app.route("/add", methods=["POST"])
+def add_item():
+    name = request.form["name"]
+    if name.strip():
+        connection = get_db_connection()
+        connection.execute("INSERT INTO outgoings (name) VALUES (?)", (name,))
+        connection.commit()
+        connection.close
+    return redirect("/")
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5001)
 
