@@ -19,6 +19,10 @@ def index():
     connection.close()
     return render_template("index.html", items=items, incomes=income.calculate_total_income([2100,1800]))
 
+@app.route("/second")
+def second_page():
+    return render_template("second.html")
+
 @app.route("/add", methods=["POST"])
 def add_item():
     name = request.form["name"]
