@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 import sqlite3
 import os
+import income
 
 db = "finance.db"
 
@@ -16,7 +17,7 @@ def index():
     connection = get_db_connection()
     items = connection.execute("SELECT * FROM outgoings").fetchall()
     connection.close()
-    return render_template("index.html", items=items)
+    return render_template("index.html", items=items, incomes=income.calculate_total_income([2100,1800]))
 
 @app.route("/add", methods=["POST"])
 def add_item():
