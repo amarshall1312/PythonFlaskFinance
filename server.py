@@ -14,9 +14,9 @@ def get_db_connection():
 @app.route("/")
 def index():
     connection = get_db_connection()
-    items = connection.execute("SELECT * FROM savingpots").fetchall()
+    items = connection.execute("SELECT * FROM outgoings").fetchall()
     connection.close()
-    return render_template("./index.html", items=items)
+    return render_template("index.html", items=items)
 
 @app.route("/add", methods=["POST"])
 def add_item():

@@ -9,19 +9,42 @@
     </style>
 </head>
 <body>
-    <h1>Items</h1>
-    <form action="/add" method="post">
-        <input type="text" name="name" placeholder="Enter item" required>
-        <button type="submit">Add</button>
-    </form>
-    <table>
-        <tr><th>ID</th><th>Name</th></tr>
-        {% for item in items %}
-        <tr>
-            <td>{{ item.id }}</td>
-            <td>{{ item.name }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <h1>Python Flask Finance</h1>
+    
+    <section id="income">
+        <h2>Base Incomes</h2>
+        <table>
+            <tr>
+                <td>Alex</td><td>2100</td>
+            </tr>
+            <tr>
+                <td>Amber</td><td>1800</td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="saving-pots">
+        <table>
+            <tr><th></th></tr>
+
+        </table>
+    </section>
+    <section id="outgoings-table">
+        <form action="/add" method="post">
+            <input type="text" name="name" placeholder="Enter item" required>
+            <button type="submit">Add</button>
+        </form>
+        <table>
+            <tr><th>ID</th><th>Name</th><th>Annual Cost</th></tr>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.annual_cost }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+
 </body>
 </html>
