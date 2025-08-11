@@ -23,14 +23,24 @@ def index():
 def second_page():
     return render_template("second.html")
 
-@app.route("/add", methods=["POST"])
+@app.route("/add-outgoing", methods=["POST"])
 def add_item():
     name = request.form["name"]
+    monthly_cost = request.form["monthly-cost"]
+    fixed = 1 if request.form.get("fixed") == "on" else 0
+    frequency = request.form.get("frequency", "monthly")
+    # Optionally handle date and category, or set to None/default
+    date = None
+    category = None
+
     if name.strip():
         connection = get_db_connection()
-        connection.execute("INSERT INTO outgoings (name) VALUES (?)", (name,))
+        connection.execute(
+            "INSERT INTO outgoings (name, fixed, amount, frequency, date, category) VALUES (?, ?, ?, ?, ?, ?)",
+            (name, fixed, monthly_cost, frequency, date, category)
+        )
         connection.commit()
-        connection.close
+        connection.close()
     return redirect("/")
 
 if __name__ == "__main__":
