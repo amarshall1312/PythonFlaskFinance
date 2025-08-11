@@ -10,9 +10,15 @@
 </head>
 <body>
     <h1>Python Flask Finance</h1>
+
+    <section id="spending-breakdown">
+
+    </section>
     
     <section id="income">
+    
         <h2>Base Incomes</h2>
+    
         <table>
             <tr>
                 <td>Alex</td><td>2100</td>
@@ -24,7 +30,18 @@
                 <td>Total</td><td>{{ incomes }}</td>
             </tr>
         </table>
+
+        <br>
+        
+        <section>
+            <input placeholder="name" type="text">
+            <input placeholder="Amount" type="number">
+            <button id="add-income">Add Income</button>
+        </section>
+    
+        <br>
     </section>
+
 
     <section id="saving-pots">
         <table>
@@ -32,13 +49,12 @@
 
         </table>
     </section>
+    <br>
     <section id="outgoings-table">
-        <form action="/add" method="post">
-            <input type="text" name="name" placeholder="Enter item" required>
-            <button type="submit">Add</button>
-        </form>
+        <h2>Bills</h2>
+        <h3>Fixed Bills</h3>
         <table>
-            <tr><th>ID</th><th>Name</th><th>Annual Cost</th></tr>
+            <tr><th>ID</th><th>Bill</th><th>Annual Cost</th></tr>
             {% for item in items %}
             <tr>
                 <td>{{ item.id }}</td>
@@ -47,6 +63,20 @@
             </tr>
             {% endfor %}
         </table>
+        <form action="/add" method="post">
+            <input type="text" name="bill" placeholder="Enter item" required>
+            <button type="submit">Add</button>
+        </form>
+        <br>
+        <h3>Variable Bills</h3>
+        <table>
+            <tr><th>Bill</th><th>Cost</th></tr>
+        </table>
+        <form>
+            <input type="text" name="bill" placeholder="Bill">
+            <input type="number" name="amount" placeholder="Amount">
+            <button id="add-variable-bill">Add Bill</button>
+        </form>
     </section>
 
 </body>
