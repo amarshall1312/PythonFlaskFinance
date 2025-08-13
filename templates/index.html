@@ -16,40 +16,58 @@
          <button id="generate-report">Generate Report</button>
        
     </section>
-    
+
+
     <section id="income">
     
         <h2>Base Incomes</h2>
     
         <table>
-            <tr>
-                <td>Alex</td><td>2100</td>
+            <tr><th>Name</th><th>Amount</th></tr>
+            {% for income in incomes %}
+            <tr> 
+              <td>{{ income.owner_id }}</td>
+              <td>{{ income.amount }}</td>
             </tr>
+            {% endfor %}
             <tr>
-                <td>Amber</td><td>1800</td>
-            </tr>
-            <tr>
-                <td>Total</td><td>{{ incomes }}</td>
+                <td>Total</td><td>{{ total }}</td>
             </tr>
         </table>
 
         <br>
         
-        <section>
-            <input placeholder="name" type="text">
-            <input placeholder="Amount" type="number">
-            <button id="add-income">Add Income</button>
-        </section>
+        <form action="/add-income" method="post" id="add-outgoing-form">
+            <input type="number" name="ownerid" placeholder="Owner ID">
+            <input type="text" name="name" placeholder="Enter item" required>
+            <input type="number" name="amount" placeholder="Income Amount" required>
+            <button type="submit">Add Income</button>
+        </form>
     
         <br>
     </section>
 
 
     <section id="saving-pots">
-        <table>
-            <tr><th></th></tr>
-
+        <h2>Saving Pots</h2>
+        <table id="saving-pot-table">
+            <tr><th>Pot</th><th>type</th><th>target</th><th>Current Progress</th></tr>
+            {% for pot in saving_pots %}
+            <tr>
+                <td>{{ pot.name }}</td>
+                <td>{{ pot.type }}</td>
+                <td>{{ pot.target }}</td>
+                <td>Insert current saved</td>
+            </tr>
+            {% endfor %}
         </table>
+        <br>
+        <form action="/add-savingpot" method="post" id="add-savingpot-form">
+            <input type="text" name="name" placeholder="Pot name">
+            <input type="text" name="type" placeholder="type">
+            <input type="number" name="target" placeholder="Target">
+            <button type="submit">Add Pot</button>
+        </form>
     </section>
     <br>
     <section id="outgoings-table">
@@ -73,6 +91,8 @@
                 <td>{{ item.amount }}</td>
                 <td>{{ item.frequency }}</td>
                 <td>{{ item.fixed }}</td>
+                <td>{{ item.date }}</td>
+                <td>{{ item.category }}</td>
             </tr>
             {% endfor %}
             
