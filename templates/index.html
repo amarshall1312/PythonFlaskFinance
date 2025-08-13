@@ -56,7 +56,16 @@
         <h2>Bills</h2>
         <h3>Fixed Bills</h3>
         <table>
-            <tr><th>ID</th><th>Bill</th><th>Monthly Cost</th></tr>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Monthly Cost</th>
+                <th>Frequency</th>
+                <th>Fixed</th>
+                <th>Date</th>
+                <th>Category</th>
+            </tr>
+
             {% for item in items %}
             <tr>
                 <td>{{ item.id }}</td>
@@ -66,14 +75,19 @@
                 <td>{{ item.fixed }}</td>
             </tr>
             {% endfor %}
+            
         </table>
-        <form action="/add-outgoing" method="post">
+        
+        <form action="/add-outgoing" method="post" id="add-outgoing-form">
             <input type="text" name="name" placeholder="Enter item" required>
             <input type="number" name="monthly-cost" placeholder="Monthly Cost" required>
             <input type="checkbox" name="fixed" title="Fixed?">
             <input type="text" name="frequency" placeholder="frequency">
+            <input type="number" name="date" placeholder="Date">
+            <input type="text" name="category" placeholder="Category"> 
             <button type="submit">Add</button>
         </form>
+
         <br>
         <h3>Variable Bills</h3>
         <table>
