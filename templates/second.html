@@ -3,9 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Finance Planner</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        table { border-collapse: collapse; width: 100%; margin-top: 1em; }
+        th, td { border: 1px solid #ccc; padding: 0.5em; text-align: left; }
+        th { background: #f0f0f0; }
+        .form-section { margin-bottom: 2em; }
+        .add-pot-btn { margin-top: 0.5em; }
+        .results { margin-top: 2em; background: #f9f9f9; padding: 1em; border-radius: 5px; }
+    </style>
 </head>
 <body>
-    <h1>Hello, welcome to my website!</h1>
+    <h1>Finance Planner</h1>
+    <form method="POST" action="/calculate">
+        <div class="form-section">
+            <label for="income">Monthly Income:</label>
+            <input type="number" id="income" name="income" required>
+        </div>
+        <div class="form-section">
+            <label for="expenses">Total Monthly Expenses:</label>
+            <input type="number" id="expenses" name="expenses" required>
+        </div>
+        <div class="form-section">
+            <h2>Saving Pots</h2>
+            <table id="pots-table">
+                <thead>
+                    <tr>
+                        <th>Pot Name</th>
+                        <th>Goal Amount</th>
+                        <th>Percentage of Spare Income</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="pot_name[]" required></td>
+                        <td><input type="number" name="pot_goal[]" required></td>
+                        <td><input type="number" name="pot_percent[]" required></td>
+                        <td><button type="button" onclick="removePotRow(this)">Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="add-pot-btn" onclick="addPotRow()">Add Saving Pot</button>
+        </div>
+        <button type="submit">Calculate</button>
+    </form>
+    <div class="results" id="results">
+        <!-- Results will be displayed here by backend -->
+    </div>
+    <script>
+        function addPotRow() {
+            const table = document.getElementById('pots-table').getElementsByTagName('tbody')[0];
+            const newRow = table.rows[0].cloneNode(true);
+            Array.from(newRow.querySelectorAll('input')).forEach(input => input.value = '');
+            table.appendChild(newRow);
+        }
+        function removePotRow(btn) {
+            const row = btn.closest('tr');
+            const table = row.parentNode;
+            if (table.rows.length > 1) {
+                table.removeChild(row);
+            }
+        }
+    </script>
 </body>
 </html>
